@@ -1,0 +1,14 @@
+# Python virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# Large datasets and models
+Csv_data/*.csv
+Get_Dataset/**/*.json
+Model_Development/*.joblib
+dashboard/cli_results.json
+
+# IDE files
+.idea/
+.vscode/

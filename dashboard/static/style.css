@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3, h4 {
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px; /* Space between buttons */
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.severity-critical {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.severity-high {
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.severity-medium {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.severity-low {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.stat-card {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 5px;
+    flex: 1; /* Allow cards to grow and shrink */
+    min-width: 120px; /* Minimum width for responsiveness */
+}
+
+#stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* New style for individual CLI assessment items */
+.cli-assessment-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #ffffff; /* Ensure background is white */
+    color: #333; /* Ensure text is dark */
+}
+
+/* Specific styles for CLI results text visibility */
+#cli-results p, #cli-results h4, #cli-results span {
+    color: #333 !important; /* Force dark text color for all elements within cli-results */
+}
+
+/* Ensure the main container for CLI results also has a background */
+#cli-results {
+    background-color: #f9f9f9; /* Match .result background */
+}

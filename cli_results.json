@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "description": "SQL Injection in login form",
+      "cwe_ids": "cwe-77",
+      "severity": "High",
+      "recommendations": [
+        "Prioritize patching and apply updates within 24-48 hours.",
+        "Implement compensating controls if immediate patching is not possible.",
+        "Review access controls and network segmentation."
+      ],
+      "timestamp": "2025-09-13T22:50:58.009797"
+    }
+  ]
+}

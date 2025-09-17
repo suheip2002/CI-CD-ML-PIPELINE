@@ -1,0 +1,42 @@
+repo_full_name,alert_number,state,created_at,updated_at,dismissed_at,dismissed_reason,dependency_name,dependency_scope,vulnerability_severity,vulnerability_advisory_ghsa_id,vulnerability_advisory_summary,vulnerability_advisory_description,vulnerability_cve_id,first_patched_version,vulnerable_versions
+suheip2002/manage-landing-page,19,open,2025-09-10 21:15:37+00:00,2025-09-10 21:15:37+00:00,,,vite,development,low,,,,,,<= 5.4.19
+suheip2002/manage-landing-page,18,open,2025-09-10 21:15:36+00:00,2025-09-10 21:15:36+00:00,,,vite,development,low,,,,,,<= 5.4.19
+suheip2002/manage-landing-page,17,open,2025-09-10 02:44:53+00:00,2025-09-10 02:44:53+00:00,,,vite,development,low,,,,,,<= 5.4.19
+suheip2002/manage-landing-page,16,open,2025-09-10 02:44:50+00:00,2025-09-10 02:44:50+00:00,,,vite,development,low,,,,,,<= 5.4.19
+suheip2002/manage-landing-page,15,open,2025-07-31 10:36:20+00:00,2025-07-31 10:36:20+00:00,,,vite,development,medium,,,,,,<= 4.5.13
+suheip2002/manage-landing-page,14,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,vite,development,medium,,,,,,< 4.5.13
+suheip2002/manage-landing-page,13,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,vite,development,medium,,,,,,< 4.5.12
+suheip2002/manage-landing-page,12,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,vite,development,medium,,,,,,< 4.5.11
+suheip2002/manage-landing-page,11,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,vite,development,medium,,,,,,< 4.5.10
+suheip2002/manage-landing-page,10,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,esbuild,development,medium,,,,,,<= 0.24.2
+suheip2002/manage-landing-page,9,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,vite,development,medium,,,,,,<= 4.5.5
+suheip2002/manage-landing-page,8,auto_dismissed,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,nanoid,development,medium,,,,,,< 3.3.8
+suheip2002/manage-landing-page,7,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,rollup,development,high,,,,,,">= 3.0.0, < 3.29.5"
+suheip2002/manage-landing-page,6,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,vite,development,medium,,,,,,">= 4.0.0, < 4.5.4"
+suheip2002/manage-landing-page,5,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,vite,development,medium,,,,,,">= 4.0.0, <= 4.5.3"
+suheip2002/manage-landing-page,4,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,vite,development,medium,,,,,,">= 4.0.0, <= 4.5.2"
+suheip2002/manage-landing-page,3,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,vite,development,high,,,,,,">= 4.0.0, <= 4.5.1"
+suheip2002/manage-landing-page,2,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,postcss,development,medium,,,,,,< 8.4.31
+suheip2002/manage-landing-page,1,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,vite,development,high,,,,,,">= 4.0.0, < 4.0.5"
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,22,open,2025-09-12 00:57:50+00:00,2025-09-12 00:57:50+00:00,,,axios,runtime,high,,,,,,< 1.12.0
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,21,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,brace-expansion,runtime,low,,,,,,">= 1.0.0, <= 1.1.11"
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,20,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,axios,runtime,high,,,,,,< 0.30.0
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,19,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,@babel/runtime,runtime,medium,,,,,,< 7.26.10
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,18,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,@babel/helpers,runtime,medium,,,,,,< 7.26.10
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,17,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,eazy-logger,runtime,high,,,,,,<= 4.0.1
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,16,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,nanoid,runtime,medium,,,,,,< 3.3.8
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,15,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,cookie,runtime,low,,,,,,< 0.7.0
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,14,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,send,runtime,low,,,,,,< 0.19.0
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,13,open,2025-07-31 10:36:19+00:00,2025-07-31 10:36:19+00:00,,,serve-static,runtime,low,,,,,,< 1.16.0
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,12,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,micromatch,runtime,medium,,,,,,< 4.0.8
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,11,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,socket.io,runtime,medium,,,,,,">= 3.0.0, < 4.6.2"
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,10,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,ws,runtime,high,,,,,,">= 8.0.0, < 8.17.1"
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,9,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,braces,runtime,high,,,,,,< 3.0.3
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,8,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,follow-redirects,runtime,medium,,,,,,<= 1.15.5
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,7,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,es5-ext,runtime,low,,,,,,">= 0.10.0, < 0.10.63"
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,6,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,axios,runtime,medium,,,,,,">= 0.8.1, < 0.28.0"
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,5,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,follow-redirects,runtime,medium,,,,,,< 1.15.4
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,4,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,@babel/traverse,runtime,critical,,,,,,< 7.23.2
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,3,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,postcss,runtime,medium,,,,,,< 8.4.31
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,2,open,2025-07-31 10:36:18+00:00,2025-07-31 10:36:18+00:00,,,semver,runtime,high,,,,,,< 5.7.2
+suheip2002/Soial-media-dashboard-with-dark-light-toggle,1,open,2025-07-31 10:36:17+00:00,2025-07-31 10:36:17+00:00,,,semver,runtime,high,,,,,,">= 6.0.0, < 6.3.1"

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Pipeline Vulnerability Assessment Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
+</head>
+<body>
+    <div class="container">
+        <h1>CI/CD Pipeline Vulnerability Assessment Dashboard</h1>
+
+        <section>
+            <h2>Assess a Vulnerability</h2>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" placeholder="e.g., SQL Injection in login form">
+            </div>
+            <div class="form-group">
+                <label for="cwe_ids">CWE IDs (comma-separated):</label>
+                <input type="text" id="cwe_ids" placeholder="e.g., CWE-89,CWE-200">
+            </div>
+            <button onclick="assessVulnerability()">Assess Vulnerability</button>
+            <button onclick="loadSampleVulnerabilities()" id="sample-btn">Load Sample Vulnerabilities</button>
+            <div id="assessment-result" class="result"></div>
+            <div id="sample-vulnerabilities-result" class="result"></div>
+        </section>
+
+        <section>
+            <h2>CLI Assessment Results</h2>
+            <div id="cli-results" class="result">
+                <p>Real-time results from CLI tool assessments will appear here:</p>
+            </div>
+            <button onclick="refreshCliResults()">Refresh CLI Results</button>
+        </section>
+
+        <section>
+            <h2>Statistics</h2>
+            <div id="stats-grid"></div>
+        </section>
+    </div>
+
+    <script src="{{ url_for("static", filename="index.js") }}"></script>
+</body>
+</html>
