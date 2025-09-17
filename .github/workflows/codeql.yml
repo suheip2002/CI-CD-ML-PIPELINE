@@ -122,9 +122,11 @@ jobs:
       run: npm install -g snyk
 
     - name: Run Snyk Test
-      run: snyk test --json --fail-on=never --debug --org=d3c030f3-4a1d-8f6c-cc98085e7e76 > snyk_results.json || true
+      run: |
+        snyk test --json --fail-on=never --debug --org=d3c030f3-4a1d-8f6c-cc98085e7e76 > snyk_results.json 2>&1 || echo "{}" > snyk_results.json
       env:
         SNYK_TOKEN: ${{ secrets.NEW_SNYK_TOKEN }}
+
 
     - name: Show snyk_results.json
       run: cat snyk_results.json || echo "No JSON file created"
