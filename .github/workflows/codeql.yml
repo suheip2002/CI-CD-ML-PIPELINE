@@ -24,11 +24,11 @@ jobs:
   scan-and-classify:
     runs-on: ubuntu-latest
 
+    # GITHUB_TOKEN permissions required for Dependabot alerts
     permissions:
-      contents: read          # checkout
+      contents: read
       packages: read
-      # Note: we use a Personal Access Token (CICD_TOKEN) for Dependabot API access,
-      # so 'security-events' permission here isn't strictly required for GITHUB_TOKEN.
+      security-events: read   # <-- important
 
     steps:
       - name: Checkout repository
@@ -44,7 +44,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Node (for Snyk)
+      - name: Set up Node (for Snyk)
         uses: actions/setup-node@v4
         with:
           node-version: "18"
@@ -58,15 +58,36 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.NEW_SNYK_TOKEN }}
 
-      - name: Fetch Dependabot alerts (GitHub REST)
-        run: |
-          curl -sSf \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer $GH_PAT" \
-            "https://api.github.com/repos/${{ github.repository }}/dependabot/alerts?per_page=100" \
-            > dependabot_alerts.json
+      # ----------------------------
+      # Dependabot alerts via GITHUB_TOKEN
+      # ----------------------------
+      - name: Install GitHub CLI
+        uses: cli/cli-action@v2
+
+      - name: Fetch Dependabot alerts (with pagination)
         env:
-          GH_PAT: ${{ secrets.CICD_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # provided automatically
+        run: |
+          set -e
+          # Fetch alerts (may output multiple JSON docs when paginating)
+          if gh api --paginate \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "/repos/${{ github.repository }}/dependabot/alerts" > dependabot_alerts_raw.json; then
+            # Ensure a proper JSON array
+            if jq -e . dependabot_alerts_raw.json >/dev/null 2>&1; then
+              if jq -e 'type=="array"' dependabot_alerts_raw.json >/dev/null; then
+                cp dependabot_alerts_raw.json dependabot_alerts.json
+              else
+                jq -s '.' dependabot_alerts_raw.json > dependabot_alerts.json
+              fi
+            else
+              echo "[]" > dependabot_alerts.json
+            fi
+          else
+            echo "Could not fetch Dependabot alerts (likely permissions or none exist). Using empty list."
+            echo "[]" > dependabot_alerts.json
+          fi
 
       - name: Show inputs (first few lines)
         run: |
@@ -91,6 +112,7 @@ jobs:
             snyk_results.json
             dependabot_alerts.json
             dashboard/cli_results.json
+
 
 
 
