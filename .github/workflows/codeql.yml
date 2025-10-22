@@ -9,7 +9,7 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: CI Scan & Classify
+name: "CI Scan & Classify"
 
 on:
   push:
@@ -17,16 +17,13 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
-  schedule:
-    - cron: "17 3 * * 1"
 
 jobs:
   scan-and-classify:
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
-      security-events: read   # required for /dependabot/alerts
+      security-events: read
 
     steps:
       - name: Checkout repository
@@ -40,78 +37,43 @@ jobs:
       - name: Install Python deps
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements.txt || true
+          pip install joblib pandas scikit-learn
 
-      - name: Set up Node (for Snyk)
+      - name: Install Node for Snyk
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
 
       - name: Install Snyk CLI
         run: npm install -g snyk
 
+      # IMPORTANT: clean JSON only (no --debug, no stderr to same file)
       - name: Run Snyk (never fail the build)
-        run: |
-          snyk test --json --fail-on=never --org=d3c030f3-4a1d-8f6c-cc98085e7e76 > snyk_results.json 2>&1 || echo "{}" > snyk_results.json
         env:
           SNYK_TOKEN: ${{ secrets.NEW_SNYK_TOKEN }}
+        run: |
+          snyk test --all-projects --json --fail-on=never > snyk_results.json || echo "{}" > snyk_results.json
+          head -n 20 snyk_results.json || true
 
-      # ---------- Dependabot alerts with diagnostics ----------
-      - name: Fetch Dependabot alerts (REST, with diagnostics)
+      # Optional: Dependabot (will be [] if no alerts)
+      - name: Fetch Dependabot alerts (GitHub REST)
         env:
-          TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -e
-          BASE="https://api.github.com/repos/${REPO}/dependabot/alerts?per_page=100"
-          echo "Fetching Dependabot alerts from: ${BASE}"
-
-          # Try first page with headers to capture status
-          HTTP_CODE=$(curl -sS -w "%{http_code}" -o dpa_page1.json \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            -H "Authorization: Bearer ${TOKEN}" \
-            "${BASE}")
-
-          echo "HTTP code: ${HTTP_CODE}"
-
-          if [ "${HTTP_CODE}" = "401" ] || [ "${HTTP_CODE}" = "403" ]; then
-            echo "::warning::Dependabot API returned ${HTTP_CODE}. This usually means:"
-            echo " - Dependabot alerts are not enabled on the repo, OR"
-            echo " - Org/repo policy does not allow GITHUB_TOKEN to read security events."
-            echo "Proceeding with empty alerts to keep the pipeline running."
-            echo "[]" > dependabot_alerts.json
-          elif [ "${HTTP_CODE}" != "200" ]; then
-            echo "::warning::Unexpected HTTP code ${HTTP_CODE}. Proceeding with empty alerts."
-            echo "[]" > dependabot_alerts.json
-          else
-            # Page 1 ok. If it’s an array, keep it. Else make it an array.
-            if jq -e 'type=="array"' dpa_page1.json >/dev/null 2>&1; then
-              jq -c '.' dpa_page1.json > dependabot_alerts.json
-            else
-              jq -sc '.' dpa_page1.json > dependabot_alerts.json
-            fi
-
-            # NOTE: If you expect >100 alerts, add pagination here.
-          fi
-
-          echo "First items (if any):"
-          head -n 40 dependabot_alerts.json || true
-
-      - name: Show inputs (first few lines)
-        run: |
-          echo "---- snyk_results.json (head) ----"
-          head -n 40 snyk_results.json || true
-          echo "---- dependabot_alerts.json (head) ----"
-          head -n 40 dependabot_alerts.json || true
+          REPO="${{ github.repository }}"
+          curl -sSf -H "Authorization: Bearer ${GH_TOKEN}" \
+               -H "Accept: application/vnd.github+json" \
+               "https://api.github.com/repos/${REPO}/dependabot/alerts?per_page=100" \
+               > dependabot_alerts.json || echo "[]" > dependabot_alerts.json
+          head -n 5 dependabot_alerts.json || true
 
       - name: Run classifier CLI
         run: |
           python Model_Development/cli_tool.py \
             --snyk-json snyk_results.json \
             --dependabot-json dependabot_alerts.json \
-            --model Model_Development/vulnerability_classifier_model_enhanced.joblib \
-            --out dashboard/cli_results.json
+            --model Model_Development/vulnerability_classifier_model_enhanced.joblib
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -121,6 +83,17 @@ jobs:
             snyk_results.json
             dependabot_alerts.json
             dashboard/cli_results.json
+
+      # OPTIONAL: keep dashboard in-repo always fresh
+      - name: Commit latest results to repo
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard/cli_results.json
+          git commit -m "chore(ci): update cli_results.json" || echo "No changes"
+          git push
+
 
 
 
