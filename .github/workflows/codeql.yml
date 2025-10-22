@@ -99,14 +99,19 @@ jobs:
 
 
       # OPTIONAL: keep dashboard in-repo always fresh
-      - name: Commit latest results to repo
+      - name: Commit latest results to repo (if present)
         if: success()
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dashboard/cli_results.json
-          git commit -m "chore(ci): update cli_results.json" || echo "No changes"
-          git push
+          if [ -f dashboard/cli_results.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add dashboard/cli_results.json
+            git commit -m "chore(ci): update cli_results.json" || echo "No changes to commit"
+            git push
+          else
+            echo "dashboard/cli_results.json not found; skipping commit"
+          fi
+
 
 
 
