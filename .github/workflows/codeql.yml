@@ -84,6 +84,20 @@ jobs:
             dependabot_alerts.json
             dashboard/cli_results.json
 
+      - name: Verify produced files
+        run: |
+          echo "== ls root =="
+          ls -la
+          echo "== ls dashboard =="
+          ls -la dashboard || true
+          echo "== head results =="
+          if [ -f dashboard/cli_results.json ]; then
+            head -n 40 dashboard/cli_results.json || true
+          else
+            echo "NO dashboard/cli_results.json found"
+          fi
+
+
       # OPTIONAL: keep dashboard in-repo always fresh
       - name: Commit latest results to repo
         if: success()
